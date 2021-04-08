@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,4 +28,6 @@ public class ProductImage {
 		return "http://localhost:8090" + "/product-images/" + this.id;
 	}
 
+	@Transient
+	public String dataUrl;
 }

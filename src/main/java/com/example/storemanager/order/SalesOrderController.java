@@ -23,7 +23,7 @@ public class SalesOrderController {
 
 	// -----------------------------------------------------
 	// Read
-	// product 목록 조회
+	// sales-order 목록 조회
 	@RequestMapping(value = "/sales-orders", method = RequestMethod.GET)
 	public List<SalesOrder> getSalesOrders(HttpServletRequest req) {
 		return salesOrderRepo.findAll(Sort.by("id").descending());

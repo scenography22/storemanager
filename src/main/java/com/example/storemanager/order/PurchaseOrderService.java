@@ -15,15 +15,15 @@ public class PurchaseOrderService {
 		this.detailRepo = detailRepo;
 	}
 
-	@RabbitListener(queues = "commerce.purchaseorder")
+	@RabbitListener(queues = "store.purchaseorder")
 	public void receiveOrder(PurchaseOrder order) {
 
 		PurchaseOrder purchaseOrder = PurchaseOrder.builder().amount(order.getAmount()).userName(order.getUserName())
-				.userAddress(order.getUserAddress()).status("결제완료").orderDate(order.getOrderDate()).build();
+				.userAddress(order.getUserAddress()).status(order.getStatus()).orderDate(order.getOrderDate()).build();
 
 		System.out.println(purchaseOrder);
 		orderRepo.save(purchaseOrder);
-		System.out.println("----- ORDER LOG -----");
+		System.out.println("----- RECEIVE LOG -----");
 		System.out.println(order);
 	}
 }

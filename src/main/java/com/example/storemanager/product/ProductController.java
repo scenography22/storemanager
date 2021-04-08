@@ -29,12 +29,17 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.storemanager.configuration.ApiConfiguration;
+
 @RestController
 public class ProductController {
 	private ProductRepository productRepo;
 	private ProductImageRepository productImageRepo;
 	private ProductService service;
 	private final Path FILE_PATH = Paths.get("product_image");
+
+	@Autowired
+	private ApiConfiguration apiConfig;
 
 	@Autowired
 	public ProductController(ProductRepository productRepo, ProductImageRepository productImageRepo,
@@ -92,7 +97,16 @@ public class ProductController {
 	// product 목록 조회
 	@RequestMapping(value = "/products", method = RequestMethod.GET)
 	public List<Product> getProducts(HttpServletRequest req) {
-		return productRepo.findAll(Sort.by("id").descending());
+		// return productRepo.findAll(Sort.by("id").descending());
+
+		List<Product> list = productRepo.findAll(Sort.by("id").descending());
+		for (Product product : list) {
+			for (ProductImage image : product.getImages()) {
+				image.setDataUrl(apiConfig.getBasePath() + "/product-images" + image.getId());
+			}
+		}
+
+		return list;
 	}
 
 	// {id}인 product 조회
@@ -171,7 +185,7 @@ public class ProductController {
 	// -----------------------------------------------------
 	// Update
 	// product 1건 수정
-	@RequestMapping(value = "/products/{id}", method = RequestMethod.PUT)
+	@RequestMapping(value = "/product/{id}", method = RequestMethod.PUT)
 	public Product modifyProduct(@PathVariable("id") long id, @RequestParam("code") String code,
 			@RequestParam("category") String category, @RequestParam("name") String name,
 			@RequestParam("price") long price, @RequestParam("quantity") long quantity,
@@ -205,7 +219,7 @@ public class ProductController {
 	// -----------------------------------------------------
 	// Delete
 	// product 1건 삭제
-	@RequestMapping(value = "/products/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/product/{id}", method = RequestMethod.DELETE)
 	public boolean deleteProduct(@PathVariable("id") long id, HttpServletResponse res) {
 		Product product = productRepo.findById(id).orElse(null);
 
@@ -225,6 +239,7 @@ public class ProductController {
 	}
 
 	// {id}인 product에 product-images 목록 삭제
+	@RequestMapping(value = "/product/{id}/proudct-images", method = RequestMethod.DELETE)
 	public boolean deleteProductImages(@PathVariable("id") long id, HttpServletResponse res) {
 
 		if (productRepo.findById(id).orElse(null) == null) {
