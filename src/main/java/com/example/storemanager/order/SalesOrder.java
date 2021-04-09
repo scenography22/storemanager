@@ -25,15 +25,17 @@ public class SalesOrder {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
-	private long amount;
-	private String name;
-	private String address;
+	private String orderNumber;
+	private String userName;
+	private String userAddress;
+	private String orderStatus;
+
+	private String category;
+	private String productName;
+	private long quantity;
+	private long price;
+
 	private String orderDate;
+	private String modifiedTime;
 
-	private String status;
-	private long purchaseOrderId;
-
-	@OneToMany(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "salesOrderId")
-	private List<SalesOrderDetail> salesOrderDetails;
 }

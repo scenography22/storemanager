@@ -24,12 +24,18 @@ public class PurchaseOrder {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
-	private long amount;
+	private String orderNumber;
 	private String userName;
 	private String userAddress;
-	private String status;
+	private String orderStatus;
+
+	private String category;
+	private String productName;
+	private long quantity;
+	private long price;
 
 	private String orderDate;
+	private String modifiedTime;
 
 	@OneToMany
 	@JoinColumn(name = "purchaseOrderId")

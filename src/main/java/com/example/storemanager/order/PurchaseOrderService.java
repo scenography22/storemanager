@@ -7,19 +7,19 @@ import org.springframework.stereotype.Service;
 @Service
 public class PurchaseOrderService {
 	private PurchaseOrderRepository orderRepo;
-	private PurchaseOrderDetailRepository detailRepo;
 
 	@Autowired
-	public PurchaseOrderService(PurchaseOrderRepository orderRepo, PurchaseOrderDetailRepository detailRepo) {
+	public PurchaseOrderService(PurchaseOrderRepository orderRepo) {
 		this.orderRepo = orderRepo;
-		this.detailRepo = detailRepo;
 	}
 
 	@RabbitListener(queues = "store.purchaseorder")
 	public void receiveOrder(PurchaseOrder order) {
 
-		PurchaseOrder purchaseOrder = PurchaseOrder.builder().amount(order.getAmount()).userName(order.getUserName())
-				.userAddress(order.getUserAddress()).status(order.getStatus()).orderDate(order.getOrderDate()).build();
+		PurchaseOrder purchaseOrder = PurchaseOrder.builder().orderNumber(order.getOrderNumber())
+				.userName(order.getUserName()).userAddress(order.getUserAddress()).orderStatus(order.getOrderStatus())
+				.orderDate(order.getOrderDate()).category(order.getCategory()).productName(order.getProductName())
+				.quantity(order.getQuantity()).price(order.getPrice()).build();
 
 		System.out.println(purchaseOrder);
 		orderRepo.save(purchaseOrder);
