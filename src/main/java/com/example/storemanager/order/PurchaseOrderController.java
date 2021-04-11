@@ -30,7 +30,7 @@ public class PurchaseOrderController {
 	}
 
 	@RequestMapping(value = "/purchase-order/{id}", method = RequestMethod.PUT)
-	public PurchaseOrder modifyStatus(@PathVariable("id") long id, @RequestParam("orderStatus") String orderStatus,
+	public PurchaseOrder modifyStatus(@PathVariable("id") long id, @RequestParam("purchaseState") String purchaseState,
 			HttpServletResponse res) {
 
 		PurchaseOrder purchaseOrder = purchaseOrderRepo.findById(id).orElse(null);
@@ -44,7 +44,7 @@ public class PurchaseOrderController {
 		Calendar c1 = Calendar.getInstance();
 		String Today = sdf.format(c1.getTime());
 		purchaseOrder.setModifiedTime(Today);
-		purchaseOrder.setOrderStatus(orderStatus);
+		purchaseOrder.setPurchaseState(purchaseState);
 
 		purchaseOrderRepo.save(purchaseOrder);
 

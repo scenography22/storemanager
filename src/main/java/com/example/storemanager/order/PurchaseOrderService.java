@@ -13,13 +13,13 @@ public class PurchaseOrderService {
 		this.orderRepo = orderRepo;
 	}
 
-	@RabbitListener(queues = "store.purchaseorder")
+	@RabbitListener(queues = "store.order")
 	public void receiveOrder(PurchaseOrder order) {
 
 		PurchaseOrder purchaseOrder = PurchaseOrder.builder().orderNumber(order.getOrderNumber())
-				.userName(order.getUserName()).userAddress(order.getUserAddress()).orderStatus(order.getOrderStatus())
-				.orderDate(order.getOrderDate()).category(order.getCategory()).productName(order.getProductName())
-				.quantity(order.getQuantity()).price(order.getPrice()).build();
+				.userName(order.getUserName()).userAddress(order.getUserAddress())
+				.purchaseState(order.getPurchaseState()).orderDate(order.getOrderDate()).category(order.getCategory())
+				.productName(order.getProductName()).quantity(order.getQuantity()).price(order.getPrice()).build();
 
 		System.out.println(purchaseOrder);
 		orderRepo.save(purchaseOrder);

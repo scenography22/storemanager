@@ -27,7 +27,7 @@ public class PurchaseOrder {
 	private String orderNumber;
 	private String userName;
 	private String userAddress;
-	private String orderStatus;
+	private String purchaseState;
 
 	private String category;
 	private String productName;
