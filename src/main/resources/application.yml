@@ -2,7 +2,8 @@ server:
  port: 8090
 
 spring:
-#  application:#    name: store-manager
+#  application#    name: store-manager
+  
   servlet:
     #multipart 파일처리 조건
     multipart:
@@ -27,10 +28,21 @@ spring:
     host: ec2-13-124-232-201.ap-northeast-2.compute.amazonaws.com
     username: rabbitmq
     password: password123
-    
+
+api:
+   base-path: http://localhost:8090
+   
+---
+spring:
+  profiles: prod    
 #eureka:
 #  client:
 #    serviceUrl:
 #      defaultZone: http://192.168.0.24:8761/eureka/
 #  instance:
 #    hostname: 192.168.0.23
+
+api:
+  base-path: 
+
+

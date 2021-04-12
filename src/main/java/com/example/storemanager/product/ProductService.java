@@ -18,6 +18,6 @@ public class ProductService {
 		System.err.println(product);
 
 		// exchange, topic(routing key), message
-		// rabbit.convertAndSend("amq.topic", "mdm.product", product);
+		rabbit.convertAndSend("amq.topic", "mdm.product", product);
 	}
 }

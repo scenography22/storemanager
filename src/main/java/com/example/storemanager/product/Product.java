@@ -3,6 +3,7 @@ package com.example.storemanager.product;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -41,7 +42,7 @@ public class Product {
 	private String modifiedTime;
 	private Date deletedTime;
 
-	@OneToMany
+	@OneToMany(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "productId")
 	private List<ProductImage> images;
 }

@@ -24,10 +24,9 @@ public class ProductImage {
 	private String contentType;
 	private long productId;
 
-	public String getDataUrl() {
-		return "http://localhost:8090" + "/product-images/" + this.id;
-	}
+//	public String getDataUrl() {
+//		return "http://localhost:8090" + "/product-images/" + this.id;
+//	}
 
-	@Transient
 	public String dataUrl;
 }
