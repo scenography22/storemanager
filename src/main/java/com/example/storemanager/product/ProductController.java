@@ -88,6 +88,7 @@ public class ProductController {
 				.contentType(image.getContentType()).build();
 
 		productImageRepo.save(productImage);
+		service.sendProductImage(productImage);
 		return productImage;
 
 	}
