@@ -35,6 +35,7 @@ public class PurchaseOrder {
 	private long price;
 
 	private String orderDate;
+	private String orderDay;
 	private String modifiedTime;
 
 	@OneToMany

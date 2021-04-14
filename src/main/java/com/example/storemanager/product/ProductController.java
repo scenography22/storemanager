@@ -88,6 +88,7 @@ public class ProductController {
 				.contentType(image.getContentType()).build();
 
 		productImageRepo.save(productImage);
+		productImage.setDataUrl(apiConfig.getBasePath() + "/product-images/" + productImage.getId());
 		service.sendProductImage(productImage);
 		return productImage;
 

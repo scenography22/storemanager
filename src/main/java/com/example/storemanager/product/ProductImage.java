@@ -28,5 +28,5 @@ public class ProductImage {
 //		return "http://localhost:8090" + "/product-images/" + this.id;
 //	}
 
-	public String dataUrl;
+	private String dataUrl;
 }

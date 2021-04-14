@@ -22,8 +22,10 @@ public class PurchaseOrderService {
 				.productName(order.getProductName()).quantity(order.getQuantity()).price(order.getPrice()).build();
 
 		System.out.println(purchaseOrder);
+		purchaseOrder.setOrderDay("얍");
 		orderRepo.save(purchaseOrder);
+
 		System.out.println("----- RECEIVE LOG -----");
-		System.out.println(order);
+		System.err.println(order);
 	}
 }

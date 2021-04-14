@@ -18,14 +18,13 @@ public class ProductService {
 		System.err.println(product);
 
 		// exchange, topic(routing key), message
-		rabbit.convertAndSend("amq.topic", "mdm.product", product);
+		rabbit.convertAndSend("amq.topic", "dw.product", product);
 	}
 
 	public void sendProductImage(ProductImage productImage) {
 		System.out.println("-- PRODUCT LOG --");
 		System.err.println(productImage);
 
-		// exchange, topic(routing key), message
 		rabbit.convertAndSend("product.image", productImage);
 	}
 }
