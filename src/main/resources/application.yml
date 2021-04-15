@@ -2,8 +2,9 @@ server:
  port: 8090
 
 spring:
-#  application#    name: store-manager
-  
+  application:    name: store-manager
+  profiles:
+    active: default
   servlet:
     #multipart 파일처리 조건
     multipart:
@@ -28,21 +29,30 @@ spring:
     host: ec2-13-124-232-201.ap-northeast-2.compute.amazonaws.com
     username: rabbitmq
     password: password123
+    
+eureka:
+  client:
+    service-url:
+      defaultZone: http://192.168.0.24:8761/eureka/
+  instance:
+    hostname: 192.168.0.23
 
 api:
    base-path: http://localhost:8090
    
 ---
+# nohup java -jar -Dspring.profiles.active=prod storemanager-0.0.1-SNAPSHOT.jar > storemanager.log &
 spring:
   profiles: prod    
-#eureka:
-#  client:
-#    serviceUrl:
-#      defaultZone: http://192.168.0.24:8761/eureka/
-#  instance:
-#    hostname: 192.168.0.23
+  
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://52.78.12.251:8761/eureka/
+  instance:
+    hostname: 13.124.232.201
 
 api:
-  base-path: 
+  base-path: http://ec2-13-124-232-201.ap-northeast-2.compute.amazonaws.com:8090
 
 

@@ -104,7 +104,7 @@ public class ProductController {
 		List<Product> list = productRepo.findAll(Sort.by("id").descending());
 		for (Product product : list) {
 			for (ProductImage image : product.getImages()) {
-				image.setDataUrl(apiConfig.getBasePath() + "/product-images" + image.getId());
+				image.setDataUrl(apiConfig.getBasePath() + "/product-images/" + image.getId());
 			}
 		}
 

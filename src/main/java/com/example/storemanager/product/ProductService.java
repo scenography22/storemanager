@@ -22,7 +22,7 @@ public class ProductService {
 	}
 
 	public void sendProductImage(ProductImage productImage) {
-		System.out.println("-- PRODUCT LOG --");
+		System.out.println("-- PRODUCT IMAGE LOG --");
 		System.err.println(productImage);
 
 		rabbit.convertAndSend("product.image", productImage);
